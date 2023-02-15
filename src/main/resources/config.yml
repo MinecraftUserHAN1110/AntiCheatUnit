@@ -1,0 +1,13 @@
+command:
+  # /anticheatunit reload
+  reload:
+    # if you enable it, you can use anticheatunit safety but lagging.
+    load_with_matrix: false
+
+login:
+
+  # Player discord nickname
+  id: idontknow
+
+  # Player discord number
+  password: imjustuser
