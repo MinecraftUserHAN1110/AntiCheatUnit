@@ -11,6 +11,7 @@ import org.bukkit.entity.Player;
 
 public class RotationFix extends PacketListenerAbstract {
     private float yaw, pitch, lastYaw, lastPitch;
+    private boolean a = true;
     public float getYaw() {
         return yaw;
     }
@@ -127,5 +128,19 @@ public class RotationFix extends PacketListenerAbstract {
             final WrappedPacketInFlying p = new WrappedPacketInFlying(e.getNMSPacket());
             handleRotation(p, e.getPlayer());
         }
+        if(e.getPacketId() == PacketType.Play.Client.POSITION){
+            Player p = e.getPlayer();
+            double lastY = 0;
+            double currentY;
+            if(this.a){
+                lastY = p.getLocation().getY();
+                this.a = false;
+                return;
+            }
+            currentY = p.getLocation().getY();
+            this.a = true;
+            p.sendMessage("" + ((currentY - lastY)-p.getLocation().getY()));
+
+        }    
     }
 }
