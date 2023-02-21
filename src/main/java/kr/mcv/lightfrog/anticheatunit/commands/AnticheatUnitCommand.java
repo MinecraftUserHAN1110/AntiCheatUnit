@@ -5,7 +5,6 @@ import kr.mcv.lightfrog.anticheatunit.utils.minecraft.network.NPCCommander;
 import kr.mcv.lightfrog.anticheatunit.utils.system.Timer;
 import me.rerere.matrix.api.HackType;
 import me.rerere.matrix.api.MatrixAPIProvider;
-import net.minecraft.server.level.EntityPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -102,6 +101,7 @@ public class AnticheatUnitCommand implements CommandExecutor {
             sender.sendMessage(ChatColor.GOLD + "Add %value% Violation %player%");
             return true;
         }
+        return true;
     }
 
     private Player getPlayer(String name) {

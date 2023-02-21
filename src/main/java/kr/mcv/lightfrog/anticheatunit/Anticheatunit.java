@@ -20,7 +20,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Anticheatunit extends JavaPlugin {
 
-    public static final String NAME = "ACU2 B2";
+    public static final String NAME = "ACU3 B2";
     public static Anticheatunit INSTANCE;
     private MatrixAPI matrix;
     private ProtocolManager protocolMananger;
@@ -40,14 +40,6 @@ public final class Anticheatunit extends JavaPlugin {
         System.out.println("-------------------------------------");
 
         saveDefaultConfig();
-
-        if (checkLogin()) {
-            System.out.println("Failed to login!");
-            System.out.println("Plugin disabled!");
-            Bukkit.getPluginManager().disablePlugin(this);
-            HandlerList.unregisterAll();
-            return;
-        }
 
         PluginManager pm = Bukkit.getPluginManager();
         //new NPCCommander(this);
@@ -115,19 +107,6 @@ public final class Anticheatunit extends JavaPlugin {
         HandlerList.unregisterAll();
         System.out.println("All checks uninjected.");
         System.out.println("Thanks for using this plugin");
-    }
-
-    private boolean checkLogin() {
-        if (getConfig().getString("login.id").equalsIgnoreCase("HAN1110")) {
-            return !getConfig().getString("login.password").equalsIgnoreCase("4569");
-        } else if (getConfig().getString("login.id").equalsIgnoreCase("Frog")) {
-            return !getConfig().getString("login.password").equalsIgnoreCase("5600");
-        } else if (getConfig().getString("login.id").equalsIgnoreCase("Rejomy")) {
-            return !getConfig().getString("login.password").equalsIgnoreCase("4993");
-        } else if (getConfig().getString("login.id").equalsIgnoreCase("MISHA")) {
-            return !getConfig().getString("login.password").equalsIgnoreCase("0045");
-        }
-        return true;
     }
 
     public boolean checkPlugin() {

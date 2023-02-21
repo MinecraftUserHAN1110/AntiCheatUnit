@@ -52,8 +52,8 @@ public class MoveCheck extends Check implements Listener {
             {
                 if (getSpeedModifier(d, u) > 0.64) {
                     lagback(e);
-                    flag(e.getPlayer(), getType(), "speed=(" + d.getSpeed() + "), jumping=(" +
-                            e.getPlayer().isJumping() + ")", new Component(new Observable<>("move.anticheatunit.speed").get()), 5);
+                    flag(e.getPlayer(), getType(), "speed=(" + d.getSpeed() + ")",
+                            new Component(new Observable<>("move.anticheatunit.speed").get()), 5);
                 }
             }
 
@@ -157,6 +157,16 @@ public class MoveCheck extends Check implements Listener {
                         }
                     } */
                 }
+
+                fly_d: {
+                    if (Math.abs(u.getY() - u.getLastY()) > 2.0 + getYModifier(u)) {
+                        lagback(e);
+
+                        flag(e.getPlayer(), getType(), "jump-height=(" + Math.abs(u.getY() - u.getLastY()) + ")", new Observable<>(
+                                new Component("move.anticheatunit.fly")
+                        ).get(), 10);
+                    }
+                }
             }
         }
     }
@@ -165,10 +175,6 @@ public class MoveCheck extends Check implements Listener {
     public void onViolationEvent(PlayerViolationEvent e) {
         if (e.getHackType() == HackType.MOVE) {
             if (BlockManager.INSTANCE.isCarpet(e.getPlayer().getLocation().getBlock().getType()) && e.getPlayer().isCollidable()) {
-                e.setCancelled(true);
-            }
-
-            if (e.getPlayer().isJumping() && e.getPlayer().isCollidable()) {
                 e.setCancelled(true);
             }
         }

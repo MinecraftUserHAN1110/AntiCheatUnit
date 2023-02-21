@@ -122,25 +122,24 @@ public class RotationFix extends PacketListenerAbstract {
         return yawDelta / .15;
     }
 
+    private double lastY;
+    private double currentY;
+
     @Override
     public void onPacketPlayReceive(PacketPlayReceiveEvent e) {
         if (e.getPacketId() == PacketType.Play.Client.FLYING) {
             final WrappedPacketInFlying p = new WrappedPacketInFlying(e.getNMSPacket());
             handleRotation(p, e.getPlayer());
+            handlePosition(p, e.getPlayer());
         }
-        if(e.getPacketId() == PacketType.Play.Client.POSITION){
-            Player p = e.getPlayer();
-            double lastY = 0;
-            double currentY;
-            if(this.a){
-                lastY = p.getLocation().getY();
-                this.a = false;
-                return;
-            }
-            currentY = p.getLocation().getY();
-            this.a = true;
-            p.sendMessage("" + ((currentY - lastY)-p.getLocation().getY()));
+    }
 
-        }    
+    private void handlePosition(WrappedPacketInFlying p, Player player) {
+        User u = new User(player);
+
+        lastY = currentY;
+        currentY = (int) p.getPosition().getY();
+        u.setLastY(lastY);
+        u.setY(currentY);
     }
 }
