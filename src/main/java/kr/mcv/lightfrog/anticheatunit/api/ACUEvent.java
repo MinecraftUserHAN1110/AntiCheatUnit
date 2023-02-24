@@ -37,6 +37,16 @@ public class ACUEvent extends Event {
     }
 
     /**
+     * Calls the event and tests if cancelled.
+     *
+     * @return false if event was cancelled, if cancellable. otherwise true.
+     */
+    @Override
+    public boolean callEvent() {
+        return super.callEvent();
+    }
+
+    /**
      * Convenience method for providing a user-friendly identifier. By
      * default, it is the event's class's {@linkplain Class#getSimpleName()
      * simple name}.

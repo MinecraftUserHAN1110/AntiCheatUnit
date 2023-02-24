@@ -135,23 +135,4 @@ public class User {
     public float getLastPitch() {
         return lastPitch;
     }
-
-    private double lastY;
-    private double currentY;
-
-    public double getLastY() {
-        return lastY;
-    }
-
-    public double getY() {
-        return currentY;
-    }
-
-    public void setLastY(double lastY) {
-        this.lastY = lastY;
-    }
-
-    public void setY(double y) {
-        this.currentY = y;
-    }
 }

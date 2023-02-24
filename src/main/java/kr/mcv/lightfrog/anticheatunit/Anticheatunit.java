@@ -7,8 +7,8 @@ import io.github.retrooper.packetevents.settings.PacketEventsSettings;
 import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import kr.mcv.lightfrog.anticheatunit.checks.Check;
 import kr.mcv.lightfrog.anticheatunit.checks.badpackets.BadPacketsCheck;
-import kr.mcv.lightfrog.anticheatunit.checks.combat.KillAuraAsPacket;
-import kr.mcv.lightfrog.anticheatunit.checks.combat.KillAuraCheck;
+import kr.mcv.lightfrog.anticheatunit.checks.killaura.KillAuraAsPacket;
+import kr.mcv.lightfrog.anticheatunit.checks.killaura.KillAuraCheck;
 import kr.mcv.lightfrog.anticheatunit.checks.hitbox.HitBoxCheck;
 import kr.mcv.lightfrog.anticheatunit.checks.move.MoveCheck;
 import me.rerere.matrix.api.MatrixAPI;
@@ -20,11 +20,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Anticheatunit extends JavaPlugin {
 
-    public static final String NAME = "ACU3 B2";
+    public static final String NAME = "ACU3 B1";
     public static Anticheatunit INSTANCE;
     private MatrixAPI matrix;
     private ProtocolManager protocolMananger;
     private PacketEvents packetEvent;
+
+    public ProtocolManager getProtocolManager() {
+        return protocolMananger;
+    }
     @Override
     public void onEnable() {
         // Plugin startup logic

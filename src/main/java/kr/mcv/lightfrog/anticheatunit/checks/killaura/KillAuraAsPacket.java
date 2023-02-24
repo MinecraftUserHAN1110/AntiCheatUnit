@@ -1,9 +1,8 @@
-package kr.mcv.lightfrog.anticheatunit.checks.combat;
+package kr.mcv.lightfrog.anticheatunit.checks.killaura;
 
 import io.github.retrooper.packetevents.event.PacketListenerAbstract;
 import io.github.retrooper.packetevents.event.impl.PacketPlayReceiveEvent;
 import io.github.retrooper.packetevents.packettype.PacketType;
-import io.github.retrooper.packetevents.packetwrappers.play.in.flying.WrappedPacketInFlying;
 import io.github.retrooper.packetevents.packetwrappers.play.in.useentity.WrappedPacketInUseEntity;
 import me.rerere.matrix.api.HackType;
 import me.rerere.matrix.api.MatrixAPIProvider;
