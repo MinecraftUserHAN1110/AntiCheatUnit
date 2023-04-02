@@ -1,6 +1,5 @@
 package kr.mcv.lightfrog.anticheatunit.utils.minecraft.block;
 
-import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 

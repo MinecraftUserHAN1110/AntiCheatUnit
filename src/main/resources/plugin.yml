@@ -4,7 +4,7 @@ main: kr.mcv.lightfrog.anticheatunit.Anticheatunit
 api-version: 1.13
 description: Matrix Anticheat Advanced First Addon
 
-softdepend: [ ProtocolLib, packetevents, Matrix ]
+softdepend: [ ProtocolLib, Matrix ]
 
 commands:
   anticheatunit:

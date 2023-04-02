@@ -3,3 +3,19 @@ command:
   reload:
     # if you enable it, you can use anticheatunit safety but lagging.
     load_with_matrix: false
+
+checks:
+
+  killaura:
+
+    enable: true
+
+    modules:
+
+      rotations:
+
+        check_protocol_1: true
+        check_protocol_2: true
+
+        aim_speed: true
+        aim_boost: true

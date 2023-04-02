@@ -48,5 +48,15 @@ public class AimAssistProtocol extends Thread {
                 llPitch = lPitch;
                 break;
         }
+
+        protocols--;
+    }
+
+    private static int protocols = 0;
+    public boolean protocolCheck(Player p, boolean protocol1) {
+        if (protocol1 && protocols < 1) {
+            protocols++;
+        }
+        return false;
     }
 }

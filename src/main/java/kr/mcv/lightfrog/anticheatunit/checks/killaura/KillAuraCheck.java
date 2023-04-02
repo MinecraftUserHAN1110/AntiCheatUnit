@@ -76,7 +76,7 @@ public class KillAuraCheck extends Check implements Listener {
                         aimassist_a:
                         {
                             float speed = Math.abs(u.getYaw() - u.getLastYaw());
-                            if (speed > 6f) {
+                            if (speed > 6f && Anticheatunit.INSTANCE.getConfig().getBoolean("checks.killaura.modules.rotations.aim_speed")) {
                                 e.setCancelled(true);
                                 flag((Player) e.getDamager(), getType(), "player rotate so fast, speed=(" + speed + "), yaw=(" + u.getYaw() +
                                                 "), lastYaw=(" + u.getLastYaw() + ")",
@@ -86,8 +86,13 @@ public class KillAuraCheck extends Check implements Listener {
 
                         aimassist_b:
                         {
-                            if (Anticheatunit.INSTANCE.getConfig().getBoolean("checks.killaura.modules.rotations.check_protocol1")) {
-                                new AimAssistProtocol(u, e).start();
+                            if (Anticheatunit.INSTANCE.getConfig().getBoolean("checks.killaura.modules.rotations.aim_boost")) {
+                                boolean protocol1 = Anticheatunit.INSTANCE.getConfig().getBoolean("checks.killaura.modules.rotations.check_protocol1");
+                                boolean protocol2 = Anticheatunit.INSTANCE.getConfig().getBoolean("checks.killaura.modules.rotations.check_protocol2");
+                                AimAssistProtocol assist = new AimAssistProtocol(u, e);
+                                assist.protocolCheck((Player) e.getDamager(), protocol1);
+                                AimAssistProtocol assist2 = new AimAssistProtocol(u, e);
+                                assist2.protocolCheck((Player) e.getDamager(), protocol2);
                             }
                         }
                     }

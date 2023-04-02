@@ -1,11 +1,9 @@
 package kr.mcv.lightfrog.anticheatunit.commands;
 
 import kr.mcv.lightfrog.anticheatunit.Anticheatunit;
-import kr.mcv.lightfrog.anticheatunit.utils.minecraft.network.NPCCommander;
 import kr.mcv.lightfrog.anticheatunit.utils.system.Timer;
 import me.rerere.matrix.api.HackType;
 import me.rerere.matrix.api.MatrixAPIProvider;
-import net.minecraft.server.level.EntityPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -92,7 +90,7 @@ public class AnticheatUnitCommand implements CommandExecutor {
                     sender.sendMessage(ChatColor.RED + "Please set player's name");
                     return true;
                 }
-                if (args[0].equalsIgnoreCase("kb")) {
+                /* if (args[0].equalsIgnoreCase("kb")) {
                     if (args.length > 1) {
                         Player p = getPlayer(args[1]);
                         try {
@@ -105,15 +103,14 @@ public class AnticheatUnitCommand implements CommandExecutor {
                     }
                     sender.sendMessage(ChatColor.RED + "Failed to knockback (Player Nickname didnt set)");
                     return true;
-                }
+                } */
 
                 if (args[0].equalsIgnoreCase("damage")) {
                     if (args.length > 1) {
                         Player p = getPlayer(args[1]);
                         try {
-                            p.knockback(1, ThreadLocalRandom.current().nextInt(2), ThreadLocalRandom.current().nextInt(2));
                             p.damage(2);
-                            sender.sendMessage(ChatColor.GREEN + "ACU Knockbacked " + args[1] + "!");
+                            sender.sendMessage(ChatColor.GREEN + "ACU Damaged " + args[1] + "!");
                         } catch (NullPointerException e) {
                             sender.sendMessage(ChatColor.GOLD + "Failed to knockback to" + args[1] + " (NullPointerException)");
                         }

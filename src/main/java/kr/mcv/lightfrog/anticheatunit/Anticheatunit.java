@@ -2,12 +2,7 @@ package kr.mcv.lightfrog.anticheatunit;
 
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
-import io.github.retrooper.packetevents.PacketEvents;
-import io.github.retrooper.packetevents.settings.PacketEventsSettings;
-import io.github.retrooper.packetevents.utils.server.ServerVersion;
 import kr.mcv.lightfrog.anticheatunit.checks.Check;
-import kr.mcv.lightfrog.anticheatunit.checks.badpackets.BadPacketsCheck;
-import kr.mcv.lightfrog.anticheatunit.checks.killaura.KillAuraAsPacket;
 import kr.mcv.lightfrog.anticheatunit.checks.killaura.KillAuraCheck;
 import kr.mcv.lightfrog.anticheatunit.checks.hitbox.HitBoxCheck;
 import kr.mcv.lightfrog.anticheatunit.checks.move.MoveCheck;
@@ -20,11 +15,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Anticheatunit extends JavaPlugin {
 
-    public static final String NAME = "ACU3 B1";
+    public static final String NAME = "ACU3 B3";
     public static Anticheatunit INSTANCE;
     private MatrixAPI matrix;
     private ProtocolManager protocolMananger;
-    private PacketEvents packetEvent;
 
     public ProtocolManager getProtocolManager() {
         return protocolMananger;
@@ -32,12 +26,6 @@ public final class Anticheatunit extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        if (checkPlugin()) {
-            System.out.println("Plugin was disabled!");
-            Bukkit.getPluginManager().disablePlugin(this);
-            HandlerList.unregisterAll();
-            return;
-        }
         INSTANCE = this;
         System.out.println("-------------------------------------");
         System.out.println("      WELCOME TO ANTICHEATUNIT       ");
@@ -53,13 +41,6 @@ public final class Anticheatunit extends JavaPlugin {
 
         matrix = MatrixAPIProvider.getAPI();
         System.out.println("Matrix was found!");
-
-        PacketEvents.create(this);
-        packetEvent = PacketEvents.get();
-        packetEvent.registerListener(new BadPacketsCheck());
-        packetEvent.registerListener(new KillAuraAsPacket());
-        packetEvent.init();
-        System.out.println("PacketEvents was found!");
 
         Check.register(matrix);
         pm.registerEvents(new MoveCheck(), this);
@@ -77,40 +58,13 @@ public final class Anticheatunit extends JavaPlugin {
     }
 
     @Override
-    public void onLoad() {
-        PacketEvents.create(this);
-        if (checkVersion(ServerVersion.getVersion())) {
-            System.out.println("Failed to load Plugin!");
-            System.out.println("Reason: Server version is lower (min version is 1.8.8)");
-            Bukkit.getPluginManager().disablePlugin(this);
-            HandlerList.unregisterAll();
-            return;
-        }
-        PacketEventsSettings settings = PacketEvents.get().getSettings();
-        settings.fallbackServerVersion(ServerVersion.getVersion())
-                .checkForUpdates(false)
-                .bStats(true);
-        PacketEvents.get().load();
-    }
-
-    private boolean checkVersion(ServerVersion ver) {
-        if (ver.isOlderThan(ServerVersion.v_1_8_8)) {
-            return true;
-        }
-
-        return ver.isNewerThanOrEquals(ServerVersion.v_1_9) && ver.isOlderThanOrEquals(ServerVersion.v_1_12_1);
-    }
-
-    @Override
     public void onDisable() {
         // Plugin shutdown logic
         System.out.println("-------------------------------------");
         System.out.println("      GOOD BYE FROM ANTICHEATUNIT       ");
         System.out.println("-------------------------------------");
-        PacketEvents.get().terminate();
         HandlerList.unregisterAll();
         System.out.println("All checks uninjected.");
-        System.out.println("Thanks for using this plugin");
     }
 
     public boolean checkPlugin() {
