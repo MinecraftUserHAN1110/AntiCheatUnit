@@ -15,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Anticheatunit extends JavaPlugin {
 
-    public static final String NAME = "ACU3 B3";
+    public static final String NAME = "ACU3 B4";
     public static Anticheatunit INSTANCE;
     private MatrixAPI matrix;
     private ProtocolManager protocolMananger;
