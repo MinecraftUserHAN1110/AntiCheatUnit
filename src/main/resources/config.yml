@@ -19,3 +19,9 @@ checks:
 
         aim_speed: true
         aim_boost: true
+
+  move:
+
+    enable: true
+
+    lagback: true

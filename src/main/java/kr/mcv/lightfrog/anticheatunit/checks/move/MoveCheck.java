@@ -1,5 +1,6 @@
 package kr.mcv.lightfrog.anticheatunit.checks.move;
 
+import kr.mcv.lightfrog.anticheatunit.Anticheatunit;
 import kr.mcv.lightfrog.anticheatunit.checks.Check;
 import kr.mcv.lightfrog.anticheatunit.observable.Observable;
 import kr.mcv.lightfrog.anticheatunit.utils.math.YMap;
@@ -48,6 +49,9 @@ public class MoveCheck extends Check implements Listener {
 
         check:
         {
+            if (!Anticheatunit.INSTANCE.getConfig().getBoolean("checks.move.enable")) {
+                break check;
+            }
             speed:
             {
                 if (getSpeedModifier(d, u) > 0.64) {
@@ -188,6 +192,10 @@ public class MoveCheck extends Check implements Listener {
     }
 
     private void lagback(PlayerMoveEvent e) {
+        if (!Anticheatunit.INSTANCE.getConfig().getBoolean("checks.move.lagback")) {
+            return;
+        }
+
         if (!(e.getPlayer().getGameMode() == GameMode.CREATIVE || e.getPlayer().getGameMode() == GameMode.SPECTATOR || e.getPlayer().isOp())) {
             e.setTo(e.getFrom());
         }
